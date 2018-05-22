@@ -8,3 +8,4 @@ build
 sat/sudoku.in
 sat/sudoku.out
 .vscode/
+report/report.synctex.gz
