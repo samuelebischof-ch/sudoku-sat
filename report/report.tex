@@ -36,21 +36,120 @@
   % \vspace{1cm}
   {\scshape\Large USI\par}
 	{\scshape\Large Theory of Computation\par}
-	\vspace{1.5cm}
-	{\huge\bfseries SAT Lab\par}\vspace{0.5cm}
+	\vspace{4.5cm}
+  {\huge\bfseries SAT Lab\par}\vspace{0.5cm}
 	{\large\bfseries Practical Homework 2\par}
-	\vspace{2cm}
+  \vspace{2.5cm}
+  {\Large\bfseries Sudoku Solver\par}\vspace{0.5cm}
+	\vspace{6cm}
 	{\Large Andrea Frachini, Davide Bucher, Lorenzo Spoleti, Milo Wroblewski, Samuele Bischof\par}
 
 \end{titlepage}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TITLE PAGE/ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section*{Application}
+The web application is bundled with Electron.
+The application can be installed on MacOS, but requires python
+to be installed.\par\vspace{0.5cm}
+The application can be found here on \href{https://github.com/samuelebischof-ch/sudoku-sat}{GitHub}.
 
-\section*{Sudoku}
-The application is bundled inside an Electron application.
-The user can play sudoku on the board, when the solve button is pressed,
-electron writes the
-\includegraphics[width=\linewidth]{genVars.png}
-This function generates the variables. It works
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\textwidth]{sudoku.png}
+  \caption{Screenshot of the game}
+\end{figure}
+\par\vspace{1cm}
+
+When the application is started, the user can choose the difficulty level, electron then
+randomly generates a sudoku board. When a board is generated, it is possible that
+it has no solution. The board is then sent to the sudoku solver to check
+if it has a solution. Until a board with solution is found, the application
+randomly tries to generate a new board.
+
+The application runs some simple check on the input, but also if
+no number is red, it does not mean that the sudoku is correct. To check the correctedness
+you have to press the solve button.
+The application will warn the user if the board is not satisfiable.
+
+\section*{How does it work}
+First of all, the electron application generates a file sudoku.in with a total of
+81 lines. On every line there will be a value from 1 to 9 or the letter n, which stands
+for null value.
+
+Then, electron calls the \texttt{./sat/sudoku.py} script.
+
+The python script then imports the data. The following image represents the function that reads the sudoku.in
+file and stores the values in an array of arrays called grid.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\textwidth]{readFile.png}
+  \caption{The function that imports the grid from the sudoku.in file}
+\end{figure}
+\clearpage
+
+When the data is read, the next function that is run is the following:
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\textwidth]{genVars.png}
+  \caption{This function defines the variables. The idea is simple, for every
+  cell there can be a value from 1 to 9. This means we have \(9 \times 9 \times 9 \) different
+  variables, as we have \(9 \times 9 \) different cells and every single one
+  can contain 9 different values.}
+\end{figure}
+\par\vspace{1cm}
+
+After this function, the script runs \texttt{genSudokuConstr}
+This function is divided in four different parts. Each of them
+adds some clauses.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\textwidth]{clause_01.png}
+  \caption{This part of code adds a clause for every value existing
+  in grid. This means that if cell\(_{i,j}\) contains the value
+  7, this is added as a clause. So the SAT solver knows that in
+  that cell there has to be the value 7.}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\textwidth]{clause_02.png}
+  \caption{This part of code states that in every column and every row there has to be one of the values
+  from 1 to 9. Starting from line 6 in states that in every
+  cell there can only be one possible value.}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\textwidth]{clause_03.png}
+  \caption{This part of code states that in every column and every row there
+  can be only one value.}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\textwidth]{clause_04.png}
+  \caption{This part of code states that in \(3 \times 3 \) block there are no
+  repetitions on the same number.}
+\end{figure}
+
+After this, the SAT solver is executed.
+The grid is then written back to file and the electon application reads it back in and displays the result if successful
+and a warning otherwise.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\textwidth]{printBack.png}
+  \caption{Output result to file \texttt{sudoku.out}}
+\end{figure}
+
+\section*{Encountered problems}
+We did not encounter any problem as sudoku has predefined constraints,
+thus it is straightforward to transform into a SAT problem.
+
+\section*{Alternative solutions}
+For the same reason as above, sudoku does not seem to have alternative solutions.
 
 \end{document}

@@ -63,7 +63,7 @@ def genSudokuConstr(rows, columns, values, vars, grid):
 								for valB in range(valA + 1, 10):
 										clauses.append([-vars[cl(row, col, valA)], -vars[cl(row, col, valB)]])
 
-		# Check for row and columnds with different values
+		# Check for rows and columns with different values
 		for i in range(0,9):
 			for jA in range(0,9):
 				for val in range(1,10):
