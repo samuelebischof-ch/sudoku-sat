@@ -1,0 +1,21 @@
+<div id="topBar"></div>
+<div class="scene">
+  <div #card class="card">
+    <mat-card class="card__face card__face--front">
+      <mat-card-title>WELCOME</mat-card-title>
+      <mat-card-subtitle>To the SUDOKU SAT solver</mat-card-subtitle>
+      <mat-card-content id="welcome">
+        <!-- <mat-spinner *ngIf="loading"></mat-spinner> -->
+        <button [disabled]="loading" mat-button style="width: 100%" (click)="card.classList.toggle('is-flipped'); easyBtnClicked()">PLAY EASY</button>
+        <button [disabled]="loading" mat-button style="width: 100%" (click)="card.classList.toggle('is-flipped'); mediumBtnClicked()">PLAY MEDIUM</button>
+        <button [disabled]="loading" mat-button style="width: 100%" (click)="card.classList.toggle('is-flipped'); hardBtnClicked()">PLAY HARD</button>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="card__face card__face--back">
+      <mat-card-title>SUDOKU</mat-card-title>
+      <mat-card-content>
+        <app-sudoku></app-sudoku>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,142 @@
+.row {
+  display: block;
+}
+
+.square {
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
+  text-align: center;
+  margin: 1px;
+}
+
+input {
+  border-width: 0;
+  border-style: none;
+  border-radius: 0;
+}
+
+.bold {
+  font-weight: bold;
+  pointer-events:none;
+  background-color: rgba(255,255,255,0.5);
+}
+
+.red {
+  color: red;
+}
+
+.boldRed {
+  color: red;
+  font-weight: bold;
+  pointer-events:none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+#container {
+  width: 306px;
+  height: 306px;
+  position: relative;
+  border-width: 1px;
+  border-color: rgb(31, 31, 31);
+  border-style: solid;
+}
+
+#sudoku {
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+#background {
+  background-color: rgb(248, 248, 248);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+button {
+  width: 50%;
+}
+
+mat-spinner {
+  position: absolute;
+  z-index: 2;
+  left: calc(50% - 50px);
+  top: calc(50% - 50px);
+}
+
+.verticalLine1 {
+  width: 1px;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  background-color: rgb(31, 31, 31);
+}
+
+.verticalLine2 {
+  width: 2px;
+  height: 100%;
+  left: 101px;
+  position: absolute;
+  background-color: rgb(31, 31, 31);
+}
+
+.verticalLine3 {
+  width: 2px;
+  height: 100%;
+  left: 203px;
+  position: absolute;
+  background-color: rgb(31, 31, 31);
+}
+
+.verticalLine4 {
+  width: 1px;
+  height: 100%;
+  right: 0;
+  position: absolute;
+  background-color: rgb(31, 31, 31);
+}
+
+.horizontalLine1 {
+  width: 100%;
+  height: 1px;
+  top: 0;
+  position: absolute;
+  background-color: rgb(31, 31, 31);
+}
+
+.horizontalLine2 {
+  width: 100%;
+  height: 2px;
+  top: 101px;
+  position: absolute;
+  background-color: rgb(31, 31, 31);
+}
+
+.horizontalLine3 {
+  width: 100%;
+  height: 2px;
+  top: 203px;
+  position: absolute;
+  background-color: rgb(31, 31, 31);
+}
+
+.horizontalLine4 {
+  width: 100%;
+  height: 1px;
+  bottom: 0;
+  position: absolute;
+  background-color: rgb(31, 31, 31);
+}

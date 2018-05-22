@@ -1,0 +1,24 @@
+<button [disabled]="loading" #easyBtn mat-button style="width: calc(100%/3)" (click)="randomBoard(30)">EASY</button>
+<button [disabled]="loading" #mediumBtn mat-button style="width: calc(100%/3)" (click)="randomBoard(20)">MEDIUM</button>
+<button [disabled]="loading" #hardBtn mat-button style="width: calc(100%/3)" (click)="randomBoard(10)">HARD</button>
+<div id="container">
+  <div id="sudoku">
+    <div *ngFor="let line of grid;let i = index;" class="row">
+      <ng-container *ngFor="let square of line;let j = index; trackBy: trackByIndex;">
+        <input [ngClass]="gridStyle[i][j]" class="square" type="number" min="1" max="9" maxlength="1" [(ngModel)]="grid[i][j]" (input)="checkValidNumb($event.data, i, j)">
+      </ng-container>
+    </div>
+  </div>
+  <div id="background">
+    <div class="verticalLine1"></div>
+    <div class="verticalLine2"></div>
+    <div class="verticalLine3"></div>
+    <div class="verticalLine4"></div>
+    <div class="horizontalLine1"></div>
+    <div class="horizontalLine2"></div>
+    <div class="horizontalLine3"></div>
+    <div class="horizontalLine4"></div>
+  </div>
+</div>
+<button [disabled]="loading" mat-button (click)="resetBoard()">RESET</button>
+<button [disabled]="loading" mat-button (click)="solveSudoku()">SOLVE</button>

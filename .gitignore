@@ -1,0 +1,9 @@
+node_modules/
+package-lock.json
+sat/tmp_prob.cnf
+sat/solution
+**/.DS_Store
+dist
+build
+sat/sudoku.in
+sat/sudoku.out
