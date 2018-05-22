@@ -8,7 +8,6 @@ Sudoku-solver implemented with SAT. Runs with Electron.
 ## Install
 
 ```
-brew install tesseract --with-all-languages
 npm install
 ```
 

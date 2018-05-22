@@ -7,3 +7,4 @@ dist
 build
 sat/sudoku.in
 sat/sudoku.out
+.vscode/
