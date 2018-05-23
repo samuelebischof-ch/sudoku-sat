@@ -145,7 +145,7 @@ if __name__ == '__main__':
 		fl.write("\n".join([head, rls]))
 		fl.close()
 
-		# this is for runing minisat
+		# this is for running minisat
 		ms_out = Popen([minisat, "tmp_prob.cnf", "solution"], stdout=PIPE).communicate()[0]
 
 		# Print the output, just out of curiosity
